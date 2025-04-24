@@ -1,93 +1,89 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "NSQL",
-    "patterns": [
-        { "include": "#comments" },
-        { "include": "#keywords" },
-        { "include": "#operators" },
-        { "include": "#strings" },
-        { "include": "#numbers" },
-        { "include": "#identifiers" },
-        { "include": "#functions" },
-        { "include": "#types" },
-        { "include": "#literals" }
-    ],
-    "repository": {
-        "comments": {
-            "patterns": [{
-                "name": "comment.block.nsql",
-                "begin": "\\(\\*",
-                "end": "\\*\\)"
-            }]
-        },
-        "keywords": {
-            "patterns": [{
-                "name": "keyword.control.nsql",
-                "match": "\\b(ASK|TELL|FIND|SHOW|GET|HOW|MANY|FOR|TO|IN|FROM|THAT|WHERE|WHICH|HAVE|ARE|AS|WHEN|IF|AND|WITH|BETWEEN|EXISTS|HAS|PATH|TRAVERSE|VIA|DEPTH|MAX|HOPS|OR|BUT|NOT|LIKE|ADD|REMOVE|UPDATE|CREATE|WITH|GROUP|BY|HAVING|SORT|ORDER|ASC|DESC|LIMIT|OFFSET)\\b"
-            }]
-        },
-        "operators": {
-            "patterns": [{
-                "name": "keyword.operator.nsql",
-                "match": "\\b(\\=|\\>|\\<|\\>=|\\<=|\\!=|\\+|\\-|\\*|\\/|\\%)\\b"
-            }]
-        },
-        "strings": {
-            "patterns": [
-                {
-                    "name": "string.quoted.single.nsql",
-                    "begin": "'",
-                    "end": "'",
-                    "patterns": [
-                        {
-                            "name": "constant.character.escape.nsql",
-                            "match": "\\\\."
-                        }
-                    ]
-                },
-                {
-                    "name": "string.quoted.double.nsql",
-                    "begin": "\"",
-                    "end": "\"",
-                    "patterns": [
-                        {
-                            "name": "constant.character.escape.nsql",
-                            "match": "\\\\."
-                        }
-                    ]
-                }
-            ]
-        },
-        "numbers": {
-            "patterns": [{
-                "name": "constant.numeric.nsql",
-                "match": "\\b\\d+(\\.\\d+)?([FDM])?\\b"
-            }]
-        },
-        "identifiers": {
-            "patterns": [{
-                "name": "variable.other.nsql",
-                "match": "\\b[A-Za-z][A-Za-z0-9_]*\\b"
-            }]
-        },
-        "functions": {
-            "patterns": [{
-                "name": "entity.name.function.nsql",
-                "match": "\\b(SUM|AVG|COUNT|MIN|MAX|NOW)\\s*\\("
-            }]
-        },
-        "types": {
-            "patterns": [{
-                "name": "storage.type.nsql",
-                "match": "\\b(INTEGER|INT|DOUBLE|FLOAT|DECIMAL|JSONB|DATETIME|TIMESTAMP|VARCHAR|STRING|TEXT|MAP|GRAPH|BOOLEAN|BOOL|LIST|ARRAY)\\b"
-            }]
-        },
-        "literals": {
-            "patterns": [{
-                "name": "constant.language.nsql",
-                "match": "\\b(TRUE|FALSE|NULL|DATE|TIMESTAMP|NOW)\\b"
-            }]
-        }
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "NSQL",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#statement-terminator" },
+    { "include": "#query-keywords" },
+    { "include": "#clause-keywords" },
+    { "include": "#conditional-keywords" },
+    { "include": "#action-keywords" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#aggregate-functions" },
+    { "include": "#data-types" },
+    { "include": "#constants" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.line.nsql",
+      "match": ">>.*$"
     },
-    "scopeName": "source.nsql"
+    "statement-terminator": {
+      "name": "punctuation.terminator.nsql",
+      "match": "\\bPLEASE\\b"
+    },
+    "query-keywords": {
+      "name": "keyword.query.nsql",
+      "match": "\\b(ASK|TELL|FIND|SHOW|GET|HOW MANY)\\b"
+    },
+    "clause-keywords": {
+      "name": "keyword.clause.nsql",
+      "match": "\\b(FOR|TO|IN|FROM|GROUP BY|HAVING|SORT BY|ORDER BY|LIMIT|OFFSET|AS|WITH|VIA)\\b"
+    },
+    "conditional-keywords": {
+      "name": "keyword.conditional.nsql",
+      "match": "\\b(WHERE|THAT|WHICH|IF|WHEN|AND|OR|NOT|BETWEEN|EXISTS|HAS PATH|LIKE)\\b"
+    },
+    "action-keywords": {
+      "name": "keyword.action.nsql",
+      "match": "\\b(ADD|REMOVE|UPDATE|CREATE|TRAVERSE)\\b"
+    },
+    "operators": {
+      "name": "keyword.operator.nsql",
+      "match": "(=|>|<|>=|<=|!=|\\+|-|\\*|/|%)"
+    },
+    "punctuation": {
+      "name": "punctuation.nsql",
+      "match": "(\\.|,|:|;)"
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.nsql",
+          "begin": "'",
+          "end": "'"
+        },
+        {
+          "name": "string.quoted.double.nsql",
+          "begin": "\"",
+          "end": "\""
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.nsql",
+      "match": "\\b\\d+(\\.\\d+)?([FDM])?\\b"
+    },
+    "aggregate-functions": {
+      "name": "support.function.aggregate.nsql",
+      "match": "\\b(SUM|AVG|COUNT|MIN|MAX)\\b"
+    },
+    "data-types": {
+      "name": "storage.type.nsql",
+      "match": "\\b(INTEGER|INT|DOUBLE|FLOAT|DECIMAL|JSONB|DATETIME|TIMESTAMP|VARCHAR|STRING|TEXT|MAP|GRAPH|BOOLEAN|BOOL|LIST|ARRAY)\\b"
+    },
+    "constants": {
+      "name": "constant.language.nsql",
+      "match": "\\b(TRUE|FALSE|NULL|NOW)\\b"
+    },
+    "identifiers": {
+      "match": "\\b[A-Za-z][A-Za-z0-9_]*\\b",
+      "name": "variable.other.nsql"
+    }
+  },
+  "scopeName": "source.nsql"
 }

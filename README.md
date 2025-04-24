@@ -18,4 +18,3 @@ FIND products IN inventory THAT price < 20.00 AND category = 'electronics'
 2. Press `Ctrl+Shift+X` or `Cmd+Shift+X` to open the Extensions view
 3. Search for "NSQL"
 4. Click install
-
