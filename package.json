@@ -1,7 +1,7 @@
 {
   "name": "nsql",
-  "displayName": "NSQL",
-  "description": "",
+  "displayName": "NSQL Language Support",
+  "description": "Syntax highlighting for NSQL",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.99.0"
