@@ -3,6 +3,10 @@
   "displayName": "NSQL Language Support",
   "description": "Syntax highlighting for NSQL",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jacob-Walton/NSQL-VS.git"
+  },
   "engines": {
     "vscode": "^1.99.0"
   },
@@ -10,16 +14,28 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "nsql",
-      "aliases": ["NSQL", "nsql"],
-      "extensions": [".nsql"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "nsql",
-      "scopeName": "source.nsql",
-      "path": "./syntaxes/nsql.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "nsql",
+        "aliases": [
+          "NSQL",
+          "nsql"
+        ],
+        "extensions": [
+          ".nsql"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nsql",
+        "scopeName": "source.nsql",
+        "path": "./syntaxes/nsql.tmLanguage.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.3.2"
   }
 }
