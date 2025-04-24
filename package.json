@@ -1,0 +1,25 @@
+{
+  "name": "nsql",
+  "displayName": "NSQL",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "nsql",
+      "aliases": ["NSQL", "nsql"],
+      "extensions": [".nsql"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "nsql",
+      "scopeName": "source.nsql",
+      "path": "./syntaxes/nsql.tmLanguage.json"
+    }]
+  }
+}
