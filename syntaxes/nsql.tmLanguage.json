@@ -8,6 +8,9 @@
     { "include": "#clause-keywords" },
     { "include": "#conditional-keywords" },
     { "include": "#action-keywords" },
+    { "include": "#graph-keywords" },
+    { "include": "#literal-keywords" },
+    { "include": "#constraint-keywords" },
     { "include": "#operators" },
     { "include": "#punctuation" },
     { "include": "#strings" },
@@ -19,54 +22,101 @@
   ],
   "repository": {
     "comments": {
-      "name": "comment.line.nsql",
+      "name": "comment.line.double-greater-than.nsql",
       "match": ">>.*$"
     },
     "statement-terminator": {
-      "name": "punctuation.terminator.nsql",
-      "match": "\\bPLEASE\\b"
+      "name": "punctuation.terminator.statement.nsql",
+      "match": "\\bPLEASE\\b|;"
     },
     "query-keywords": {
-      "name": "keyword.query.nsql",
-      "match": "\\b(ASK|TELL|FIND|SHOW|GET|HOW MANY)\\b"
+      "name": "keyword.control.query.nsql",
+      "match": "\\b(ASK|TELL|FIND|SHOW|GET|HOW)\\b"
     },
     "clause-keywords": {
-      "name": "keyword.clause.nsql",
-      "match": "\\b(FOR|TO|IN|FROM|GROUP BY|HAVING|SORT BY|ORDER BY|LIMIT|OFFSET|AS|WITH|VIA)\\b"
+      "name": "keyword.control.clause.nsql",
+      "match": "\\b(FOR|TO|IN|FROM|GROUP|HAVING|SORT|ORDER|BY|LIMIT|OFFSET|AS|WITH|VIA|MANY)\\b"
     },
     "conditional-keywords": {
-      "name": "keyword.conditional.nsql",
-      "match": "\\b(WHERE|THAT|WHICH|IF|WHEN|AND|OR|NOT|BETWEEN|EXISTS|HAS PATH|LIKE)\\b"
+      "name": "keyword.control.conditional.nsql",
+      "match": "\\b(WHERE|THAT|WHICH|IF|WHEN|AND|OR|NOT|BETWEEN|EXISTS|HAS|PATH|HAVE|ARE|BUT)\\b"
     },
     "action-keywords": {
-      "name": "keyword.action.nsql",
-      "match": "\\b(ADD|REMOVE|UPDATE|CREATE|TRAVERSE)\\b"
+      "name": "keyword.control.action.nsql",
+      "match": "\\b(ADD|REMOVE|UPDATE|CREATE)\\b"
+    },
+    "graph-keywords": {
+      "name": "keyword.control.graph.nsql",
+      "match": "\\b(TRAVERSE|DEPTH|MAX|HOPS|NODES|EDGES|ID)\\b"
+    },
+    "literal-keywords": {
+      "name": "keyword.control.literal.nsql",
+      "match": "\\b(MAP|GRAPH|DATE|TIMESTAMP)\\b"
+    },
+    "constraint-keywords": {
+      "name": "keyword.control.constraint.nsql",
+      "match": "\\b(REQUIRED|UNIQUE|DEFAULT)\\b"
     },
     "operators": {
-      "name": "keyword.operator.nsql",
-      "match": "(=|>|<|>=|<=|!=|\\+|-|\\*|/|%)"
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.nsql",
+          "match": "(=|>|<|>=|<=|!=|\\bLIKE\\b)"
+        },
+        {
+          "name": "keyword.operator.logical.nsql",
+          "match": "\\b(AND|OR|NOT|BUT)\\b"
+        },
+        {
+          "name": "keyword.operator.arithmetic.nsql",
+          "match": "(\\+|-|\\*|/|%)"
+        }
+      ]
     },
     "punctuation": {
-      "name": "punctuation.nsql",
-      "match": "(\\.|,|:|;)"
+      "patterns": [
+        {
+          "name": "punctuation.separator.nsql",
+          "match": "(\\.|,|:)"
+        },
+        {
+          "name": "punctuation.definition.bracket.curly.nsql",
+          "match": "(\\{|\\})"
+        },
+        {
+          "name": "punctuation.definition.bracket.square.nsql",
+          "match": "(\\[|\\])"
+        },
+        {
+          "name": "punctuation.definition.bracket.round.nsql",
+          "match": "(\\()|(\\))"
+        }
+      ]
     },
     "strings": {
       "patterns": [
         {
-          "name": "string.quoted.single.nsql",
-          "begin": "'",
-          "end": "'"
-        },
-        {
           "name": "string.quoted.double.nsql",
           "begin": "\"",
-          "end": "\""
+          "end": "\"",
+          "escape": "\\\\",
+          "patterns": [
+            { "name": "constant.character.escape.nsql", "match": "\\\\." }
+          ]
         }
       ]
     },
     "numbers": {
-      "name": "constant.numeric.nsql",
-      "match": "\\b\\d+(\\.\\d+)?([FDM])?\\b"
+      "patterns": [
+        {
+          "name": "constant.numeric.decimal.nsql",
+          "match": "\\b\\d+\\.\\d+([FDM])?\\b"
+        },
+        {
+          "name": "constant.numeric.integer.nsql",
+          "match": "\\b\\d+\\b"
+        }
+      ]
     },
     "aggregate-functions": {
       "name": "support.function.aggregate.nsql",
@@ -81,8 +131,21 @@
       "match": "\\b(TRUE|FALSE|NULL|NOW)\\b"
     },
     "identifiers": {
-      "match": "\\b[A-Za-z][A-Za-z0-9_]*\\b",
-      "name": "variable.other.nsql"
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "\\b(ASC|DESC)\\b",
+              "name": "keyword.control.sort-direction.nsql"
+            },
+            {
+              "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+              "name": "variable.other.nsql"
+            }
+          ]
+        }
+      }
     }
   },
   "scopeName": "source.nsql"

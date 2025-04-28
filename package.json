@@ -1,8 +1,8 @@
 {
   "name": "nsql",
   "displayName": "NSQL Language Support",
-  "description": "Syntax highlighting for NSQL",
-  "version": "0.0.1",
+  "description": "Syntax highlighting and language features for NSQL",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jacob-Walton/NSQL-VS.git"
@@ -13,6 +13,7 @@
   "categories": [
     "Programming Languages"
   ],
+  "main": "./out/extension.js",
   "contributes": {
     "languages": [
       {
@@ -35,7 +36,25 @@
       }
     ]
   },
+  "scripts": {
+    "vscode:prepublish": "npm run compile:all",
+    "compile:client": "tsc -p ./",
+    "compile:server": "tsc -p ./server",
+    "compile:all": "npm run compile:client && npm run compile:server",
+    "watch:client": "tsc -watch -p ./",
+    "watch:server": "tsc -watch -p ./server",
+    "watch": "npm run watch:client & npm run watch:server"
+  },
   "devDependencies": {
-    "@vscode/vsce": "^3.3.2"
+    "@types/node": "20.x",
+    "@types/vscode": "^1.99.0",
+    "@vscode/vsce": "^3.3.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "nsql": "file:",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
   }
 }

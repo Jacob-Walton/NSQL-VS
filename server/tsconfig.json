@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "ES2020", // Use a modern ECMAScript target
+		"lib": ["ES2020"],
+		"module": "CommonJS", // Standard module system for Node.js
+		"moduleResolution": "node",
+		"outDir": "../out", // Output compiled JS to server/out
+		"rootDir": "src", // Source files are in server/src
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src/**/*"], // Compile all TS files in src
+	"exclude": ["node_modules", ".vscode-test"]
+}
